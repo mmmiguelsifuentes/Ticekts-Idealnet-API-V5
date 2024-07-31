@@ -1,0 +1,23 @@
+{
+  "name": "ticekts-idealnet-api-v5",
+  "version": "5.0.0",
+  "description": "Repositorio para API Tickets Idealnet Versión 5",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Miguel Sifuentes",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "lodash": "^4.17.21",
+    "mg-api-js": "^2.1.1",
+    "nodemailer": "^6.9.13",
+    "pg": "^8.11.3",
+    "dotenv": "^16.4.5",
+    "jsonwebtoken": "^8.5.1",
+    "body-parser": "^1.20.2",
+    "joi": "^17.11.0",
+    "cors": "^2.8.5"
+  }
+}
