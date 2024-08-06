@@ -3,10 +3,11 @@ const express = require('express');
 const app = express();
 const cors = require('cors')
 const bodyParser = require('body-parser');
-const dbHelper = require('./helpers/db.helper');
+const dbHelper = require('./src/helpers/db.helper');
+const errorHandler = require('./src/middlewares/error.handler');
 
 // Use environments
-require('./environments/config')
+require('./src/environments/config')
 
 //--------------------Use coors--------------------
 app.use(cors())
@@ -20,8 +21,15 @@ app.use(
 )
 app.use(bodyParser.text({ limit: process.env.REQUEST_LIMIT || '100kb' }))
 
+/**Configurations */
+app.set('port', process.env.HTTP_PORT || 3000);
+app.set('json spaces', 2);
+
 // Use Routes
-app.use(require('./routes/index.route'));
+app.use(require('./src/routes/index.route'));
+
+// use error handlers
+app.use(errorHandler)
 
 const startApp = () => {
     app.listen(app.get('port'), async () => {
@@ -30,10 +38,10 @@ const startApp = () => {
     .setTimeout(1200000);
 };
 
-dbHelper.Sequelize.authenticate()
+dbHelper.sequelize.authenticate()
     .then(() => 
         startApp()
         
-    ).cath(err => {
+    ).catch(err => {
         throw err;
     });
